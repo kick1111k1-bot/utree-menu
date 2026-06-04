@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-Tree | Course Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #F6F2EC;
+    font-family: 'Noto Serif JP', serif;
+    color: #2C2826;
+    padding: 48px 24px;
+  }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1.5px solid #C9A96E;
+    padding: 64px 72px 56px;
+  }
+
+  /* ─── Header ─── */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .header .salon {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.45em;
+    color: #C9A96E;
+    margin-bottom: 14px;
+  }
+  .header .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 46px;
+    letter-spacing: 0.04em;
+    color: #2C2826;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .header .subtitle {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: #9E8E7E;
+    margin-bottom: 20px;
+  }
+  .gold-rule {
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #C9A96E, transparent);
+    margin: 0 auto;
+  }
+
+  /* ─── Grid ─── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* ─── Card ─── */
+  .card {
+    border: 1px solid #E4D9CC;
+    padding: 36px 32px 28px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .card.featured {
+    border-color: #C9A96E;
+    grid-column: 1 / -1;
+    background: #FFFDF9;
+  }
+  .card.wide {
+    grid-column: 1 / -1;
+  }
+
+  .badge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #C9A96E;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    padding: 3px 22px;
+    white-space: nowrap;
+  }
+  .limited-tag {
+    display: inline-block;
+    border: 1px solid #C9A96E;
+    color: #C9A96E;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    padding: 3px 12px;
+    margin-bottom: 14px;
+  }
+
+  .card-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #C9A96E;
+    letter-spacing: 0.32em;
+    margin-bottom: 8px;
+  }
+  .card-name {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .featured .card-name {
+    font-size: 23px;
+  }
+  .divider {
+    width: 36px;
+    height: 1px;
+    background: #C9A96E;
+    margin-bottom: 18px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.1;
+    color: #5C524A;
+    flex: 1;
+  }
+  .card-body .indent {
+    padding-left: 1em;
+    font-size: 12px;
+    color: #7A6E65;
+  }
+  .card-body .note {
+    font-size: 11px;
+    color: #9E8E7E;
+    margin-top: 8px;
+    line-height: 1.9;
+  }
+
+  .time {
+    font-size: 11.5px;
+    color: #9E8E7E;
+    letter-spacing: 0.05em;
+    margin: 16px 0 20px;
+    border-left: 2px solid #E4D9CC;
+    padding-left: 10px;
+  }
+
+  /* ─── Price ─── */
+  .price-block {
+    border-top: 1px solid #E4D9CC;
+    padding-top: 18px;
+    margin-top: auto;
+  }
+  .price-label {
+    font-size: 9.5px;
+    letter-spacing: 0.35em;
+    color: #B0A090;
+    margin-bottom: 10px;
+  }
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .price-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    color: #C9A96E;
+    letter-spacing: 0.03em;
+    font-weight: 400;
+  }
+  .price-main.large {
+    font-size: 38px;
+  }
+  .price-original {
+    font-size: 18px;
+    color: #C0B0A0;
+    text-decoration: line-through;
+  }
+  .price-tag {
+    font-size: 11px;
+    background: #FBF4E8;
+    color: #C9A96E;
+    border: 1px solid #E8D5B0;
+    padding: 3px 12px;
+    letter-spacing: 0.08em;
+    align-self: center;
+  }
+  .savings-tag {
+    font-size: 12px;
+    background: #C9A96E;
+    color: #fff;
+    padding: 4px 14px;
+    letter-spacing: 0.06em;
+    align-self: center;
+  }
+  .price-detail {
+    font-size: 11.5px;
+    color: #7A6E65;
+    margin-top: 8px;
+    line-height: 2;
+  }
+  .price-option {
+    font-size: 11px;
+    color: #9E8E7E;
+    margin-top: 6px;
+  }
+  /* 価格縦並び表示 */
+  .price-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .price-normal {
+    font-size: 13px;
+    color: #BEB0A0;
+    text-decoration: line-through;
+    letter-spacing: 0.05em;
+  }
+  .price-first-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .price-first-label {
+    font-size: 11px;
+    color: #9E8E7E;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+  .price-first-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    color: #C9A96E;
+    font-weight: 400;
+  }
+  .price-first-amount.large {
+    font-size: 38px;
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    color: #B0A090;
+  }
+  .line-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    background: #06C755;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    padding: 14px 40px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .line-btn:hover { opacity: 0.85; }
+  .line-btn svg { flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="salon">U - T r e e</div>
+    <div class="title">Course Menu</div>
+    <div class="subtitle">整いと癒しの、あなただけの時間を。</div>
+    <div class="gold-rule"></div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid">
+
+    <!-- ごほうび整いコース（看板・全幅） -->
+    <div class="card featured">
+      <div class="badge">おすすめ &nbsp;／&nbsp; Recommended</div>
+      <div class="card-label">Course Menu B</div>
+      <div class="card-name">ごほうび整いコース</div>
+      <div class="divider"></div>
+      <div class="card-body">
+        心と身体に、深い静けさを取り戻す。脳と感情の緊張をゆるめる上質な整え時間。<br><br>
+        カウンセリングセッション・足浴・アロマトリートメント<br>
+        ＋ 以下よりお好きな<strong>二つ</strong>をお選びください<br>
+        <span class="indent">・小顔調整　・熟眠ヘッドスパ　・骨盤調整</span><br>
+        ＋ 季節の養生茶 ・ 心と体に優しいデザート
+        <div class="note">オプション：ストレスリーディング® 読み解きと分析表 6,000円</div>
+      </div>
+      <div class="time">滞在時間：200分（お着替え・ティータイム含む）｜ お急ぎの場合はご相談ください</div>
+      <div class="price-block">
+        <div class="price-label">PRICE（税込）</div>
+        <div class="price-stack">
+          <span class="price-normal">通常価格 23,000円</span>
+          <div class="price-first-row">
+            <span class="price-first-label">初回限定</span>
+            <span class="price-first-amount large">18,000円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アロマ -->
+    <div class="card">
+      <div class="card-label">Select Menu ①</div>
+      <div class="card-name">深部からほどける<br>アロマトリートメント</div>
+      <div class="divider"></div>
+      <div class="card-body">
+        アロマトリートメント 80分 ＋ 季節の養生茶<br><br>
+        ただ、自分のためだけにある時間。<br>
+        体の奥に溜まったこりと疲れを、香りとともにほどきます。
+      </div>
+      <div class="time">滞在時間：約2時間</div>
+      <div class="price-block">
+        <div class="price-label">PRICE（税込）</div>
+        <div class="price-stack">
+          <span class="price-normal">通常価格 15,000円</span>
+          <div class="price-first-row">
+            <span class="price-first-label">初回限定</span>
+            <span class="price-first-amount">12,000円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 小顔調整 -->
+    <div class="card">
+      <div class="card-label">Select Menu ②</div>
+      <div class="card-name">全身の歪みをリセットする<br>美容整体</div>
+      <div class="divider"></div>
+      <div class="card-body">
+        骨盤調整・くびれ調整・O脚調整・小顔矯正<br>
+        ＋ 季節の養生茶<br><br>
+        骨格の本来のポジションに戻すことで、<br>
+        ラインと動きやすさが自然に整います。
+      </div>
+      <div class="time">滞在時間：約2時間</div>
+      <div class="price-block">
+        <div class="price-label">PRICE（税込）</div>
+        <div class="price-stack">
+          <span class="price-normal">通常価格 15,000円</span>
+          <div class="price-first-row">
+            <span class="price-first-label">初回限定</span>
+            <span class="price-first-amount">10,000円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 産後限定（全幅） -->
+    <div class="card wide">
+      <div class="limited-tag">産後1年以内の方 限定</div>
+      <div class="card-label">Course Menu D</div>
+      <div class="card-name">産後ケアコース</div>
+      <div class="divider"></div>
+      <div class="card-body">
+        少しの時間でも、「あなたに還る」ひとときを。<br><br>
+        骨盤調整・アロマトリートメント2部位（例：背中と脚背面、脚前面とデコルテ）・小顔調整<br><br>
+        <span class="note">
+          ※産後2ヶ月以降で、医師から許可がおりている方のみ。ハイローチェアのご用意があります。託児はございません。<br>
+          ※アロマ精油は授乳中でも安心なものを低濃度でブレンド。ご体調に合わせて芳香浴にも変更可能。
+        </span>
+      </div>
+      <div class="time">滞在時間：約2時間〜（サロンを出たいお時間を事前にお伝えください）</div>
+      <div class="price-block">
+        <div class="price-label">PRICE（税込）</div>
+        <div class="price-stack">
+          <span class="price-normal">通常価格 15,000円</span>
+          <div class="price-first-row">
+            <span class="price-first-label">初回限定</span>
+            <span class="price-first-amount">10,000円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    ご予約・お問い合わせは公式LINEよりお気軽にどうぞ<br>
+    <a class="line-btn" href="https://lin.ee/zBf9OHq" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#fff">
+        <path d="M12 2C6.477 2 2 6.037 2 11c0 4.418 3.657 8.129 8.58 8.854.334.072.789.22.904.505.103.257.067.659.033.919l-.146.876c-.044.258-.205 1.01.886.55 1.091-.458 5.888-3.467 8.036-5.934C21.536 14.86 22 13 22 11c0-4.963-4.477-9-10-9z"/>
+      </svg>
+      LINEへ戻る
+    </a>
+  </div>
+
+</div>
+</body>
+</html>
