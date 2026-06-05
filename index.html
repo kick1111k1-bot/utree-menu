@@ -251,6 +251,43 @@
     font-size: 38px;
   }
 
+  /* ─── Responsive ─── */
+  @media (max-width: 640px) {
+    body { padding: 28px 16px; }
+
+    .page { padding: 44px 28px 40px; }
+
+    .header { margin-bottom: 40px; }
+    .header .title { font-size: 30px; }
+    .header .subtitle { font-size: 10px; letter-spacing: 0.22em; }
+
+    .grid { grid-template-columns: 1fr; gap: 28px; }
+
+    .card.featured,
+    .card.wide { grid-column: 1; }
+
+    .card { padding: 32px 24px 28px; }
+
+    .card-name { font-size: 14px; line-height: 1.75; }
+    .featured .card-name { font-size: 16px; }
+
+    .card-body { font-size: 12px; line-height: 2; }
+    .card-body .indent { font-size: 11px; }
+    .card-body .note { font-size: 10.5px; }
+
+    .time { font-size: 11px; margin: 14px 0 18px; }
+
+    .price-label { font-size: 9px; }
+    .price-normal { font-size: 12px; }
+    .price-first-label { font-size: 10.5px; }
+    .price-first-amount { font-size: 24px; }
+    .price-first-amount.large { font-size: 28px; }
+    .price-detail { font-size: 11px; }
+
+    .footer { margin-top: 40px; font-size: 10px; letter-spacing: 0.18em; }
+    .line-btn { font-size: 13px; padding: 13px 32px; }
+  }
+
   /* ─── Footer ─── */
   .footer {
     text-align: center;
@@ -296,7 +333,7 @@
     <!-- ごほうび整いコース（看板・全幅） -->
     <div class="card featured">
       <div class="badge">おすすめ &nbsp;／&nbsp; Recommended</div>
-      <div class="card-label">Course Menu B</div>
+
       <div class="card-name">ごほうび整いコース</div>
       <div class="divider"></div>
       <div class="card-body">
@@ -322,7 +359,7 @@
 
     <!-- アロマ -->
     <div class="card">
-      <div class="card-label">Select Menu ①</div>
+
       <div class="card-name">深部からほどける<br>アロマトリートメント</div>
       <div class="divider"></div>
       <div class="card-body">
@@ -345,14 +382,12 @@
 
     <!-- 小顔調整 -->
     <div class="card">
-      <div class="card-label">Select Menu ②</div>
+
       <div class="card-name">全身の歪みをリセットする<br>美容整体</div>
       <div class="divider"></div>
       <div class="card-body">
-        骨盤調整・くびれ調整・O脚調整・小顔矯正<br>
-        ＋ 季節の養生茶<br><br>
-        骨格の本来のポジションに戻すことで、<br>
-        ラインと動きやすさが自然に整います。
+        骨盤調整・くびれ調整・O脚調整・小顔矯正・熟眠ヘッドスパ<br>
+        ＋ 季節の養生茶
       </div>
       <div class="time">滞在時間：約2時間</div>
       <div class="price-block">
@@ -370,7 +405,7 @@
     <!-- 産後限定（全幅） -->
     <div class="card wide">
       <div class="limited-tag">産後1年以内の方 限定</div>
-      <div class="card-label">Course Menu D</div>
+
       <div class="card-name">産後ケアコース</div>
       <div class="divider"></div>
       <div class="card-body">
